@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns="www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+
+</head>
+<body>
+<h1>Formulaire de modification d'un Produit</h1>
+<form th:action="@{/modifieprod}" th:object="${produit}" method="POST">
+
+<input type="hidden" th:field="*{id}">
+
+<div>
+ <p th:text="'Code Produit:  '+${produit.id}"></p>
+</div>
+
+
+<div class="form-group row">
+<div>
+  <label class="col-sm-2">Nom Produit:</label>
+  <div>
+  <input type="text" class="col-sm-4" th:field="*{nomprod}">
+  <small class="text text-danger" th:if="${#fields.hasErrors('nomprod')}" th:errors="*{nomprod}"></small>
+  </div>
+</div>
+
+<div class="form-group row">
+<div>
+  <label class="col-sm-2">Prix:</label>
+  <div>
+  <input type="text" class="col-sm-4" th:field="*{prix}">
+  <small class="text text-danger" th:if="${#fields.hasErrors('prix')}" th:errors="*{prix}"></small>
+  </div>
+</div>
+
+<div>
+   <select th:field="*{numcateg}">
+   
+     <option value="">Sélectionnez une Catégorie</option>
+     <option th:each="c :${listecateg}"  th:value="${c.codecateg}" th:text="${c.nomcateg}"></option>
+   </select>
+  <small class="text text-danger" 
+  th:if="${#fields.hasErrors('numcateg')}" th:errors="*{numcateg}"></small>
+</div>
+<div>
+ <input type="submit" class="btn btn-primary" value="Modifier">
+</div>
+</div>
+
+
+</form>
+</body>
+</html>
